@@ -9,7 +9,7 @@ Group:		System/Configuration/Networking
 Url:		http://www.gnome.org/projects/NetworkManager/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	networkmanager-util-devel networkmanager-glib-devel
-BuildRequires:	dbus-devel dbus-glib-devel libGConf2-devel
+BuildRequires:	dbus-devel dbus-glib-devel libGConf2-devel libiw-devel
 BuildRequires:	gnome-keyring-devel gnome-panel-devel hal-devel
 BuildRequires:	libglade2-devel libnotify-devel intltool nss-devel
 Requires:	networkmanager %{_lib}gail-gnome
