@@ -1,15 +1,16 @@
 Summary:	Gnome GUI for NetworkManager
 Name:		nm-applet
 Version:	0.7.0
-Release:	%mkrel 0.1
-Source0:	%{name}-%{version}.tar.bz2
-Patch0:		nm-applet-0.7.0-fix-build.patch
+Release:	%mkrel 0.2
+Source0:	%{name}-%{version}.tar.lzma
+#Patch0:		nm-applet-0.7.0-fix-build.patch
+Patch1:		nm-applet-0.7.0-disable-stuff.patch
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.gnome.org/projects/NetworkManager/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	networkmanager-util-devel networkmanager-glib-devel
-BuildRequires:	dbus-devel dbus-glib-devel libGConf2-devel libiw-devel
+BuildRequires:	dbus-devel dbus-glib-devel libGConf2-devel
 BuildRequires:	gnome-keyring-devel gnome-panel-devel hal-devel
 BuildRequires:	libglade2-devel libnotify-devel intltool nss-devel
 Requires:	networkmanager %{_lib}gail-gnome
@@ -21,7 +22,8 @@ NetworkManager, including a panel applet for wireless networks.
 
 %prep
 %setup -q
-%patch0 -p1 -b .fixbuild
+#%%patch0 -p1 -b .fixbuild
+%patch1 -p1 -b .disable-stuff
 
 %build
 autoreconf -i --force
@@ -59,4 +61,3 @@ rm -rf %{buildroot}
 %{_sysconfdir}/xdg/autostart/nm-applet.desktop
 # This should be in -devel package, but a new package for just this one file? bah
 %{_includedir}/NetworkManager/nm-vpn-ui-interface.h
-
