@@ -13,6 +13,7 @@ BuildRequires:	networkmanager-util-devel networkmanager-glib-devel
 BuildRequires:	dbus-devel dbus-glib-devel libGConf2-devel
 BuildRequires:	gnome-keyring-devel gnome-panel-devel hal-devel
 BuildRequires:	libglade2-devel libnotify-devel intltool nss-devel
+BuildRequires:	libiw-devel
 Requires:	networkmanager %{_lib}gail-gnome
 Provides:	networmanager-gnome = %{version}-%{release}
 
