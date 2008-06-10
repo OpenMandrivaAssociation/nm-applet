@@ -4,8 +4,6 @@ Name:		nm-applet
 Version:	0.7.0
 Release:	%mkrel 0.3.%{svnrel}
 Source0:	%{name}-%{version}.%{svnrel}.tar.gz
-Patch0:		nm-applet-0.7.0-fix-build.patch
-Patch1:		nm-applet-0.7.0-disable-stuff.patch
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.gnome.org/projects/NetworkManager/
@@ -23,8 +21,6 @@ NetworkManager, including a panel applet for wireless networks.
 
 %prep
 %setup -q
-#%patch0 -p1 -b .fixbuild
-#%patch1 -p1 -b .disable-stuff
 
 %build
 autoreconf -i --force
