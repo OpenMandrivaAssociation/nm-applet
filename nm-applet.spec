@@ -1,19 +1,19 @@
+%define	svnrel	svn727
 Summary:	Gnome GUI for NetworkManager
 Name:		nm-applet
 Version:	0.7.0
-Release:	%mkrel 0.2
-Source0:	%{name}-%{version}.tar.lzma
-#Patch0:		nm-applet-0.7.0-fix-build.patch
+Release:	%mkrel 0.3.%{svnrel}
+Source0:	%{name}-%{version}.%{svnrel}.tar.gz
+Patch0:		nm-applet-0.7.0-fix-build.patch
 Patch1:		nm-applet-0.7.0-disable-stuff.patch
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.gnome.org/projects/NetworkManager/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	networkmanager-util-devel networkmanager-glib-devel
+BuildRequires:	libnm_util-devel libnm_glib-devel
 BuildRequires:	dbus-devel dbus-glib-devel libGConf2-devel
 BuildRequires:	gnome-keyring-devel gnome-panel-devel hal-devel
 BuildRequires:	libglade2-devel libnotify-devel intltool nss-devel
-BuildRequires:	libiw-devel
 Requires:	networkmanager %{_lib}gail-gnome
 Provides:	networmanager-gnome = %{version}-%{release}
 
@@ -23,8 +23,8 @@ NetworkManager, including a panel applet for wireless networks.
 
 %prep
 %setup -q
-#%%patch0 -p1 -b .fixbuild
-%patch1 -p1 -b .disable-stuff
+#%patch0 -p1 -b .fixbuild
+#%patch1 -p1 -b .disable-stuff
 
 %build
 autoreconf -i --force
@@ -35,8 +35,7 @@ intltoolize --force
 		--with-notify \
 		--with-nss=yes \
 		--with-gnutls=no
-# parallel build is broken
-make
+%make
 
 %install
 rm -rf %{buildroot}
@@ -45,6 +44,12 @@ rm -rf %{buildroot}
 %find_lang %{name}
 
 find %{buildroot} -name \*.la|xargs rm -f
+
+%post
+%update_icon_cache hicolor
+
+%postun
+%clean_icon_cache hicolor
 
 %clean
 rm -rf %{buildroot}
