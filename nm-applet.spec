@@ -12,6 +12,7 @@ BuildRequires:	libnm_util-devel libnm_glib-devel
 BuildRequires:	dbus-devel dbus-glib-devel libGConf2-devel
 BuildRequires:	gnome-keyring-devel gnome-panel-devel hal-devel
 BuildRequires:	libglade2-devel libnotify-devel intltool nss-devel
+BuildRequires:	libpolkit-devel libpolkit-gnome-devel libiw-devel
 Requires:	networkmanager %{_lib}gail-gnome
 Provides:	networmanager-gnome = %{version}-%{release}
 
