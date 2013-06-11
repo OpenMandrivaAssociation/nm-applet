@@ -1,27 +1,40 @@
-%define	svnrel	svn727
+%define url_ver %(echo %{version}|cut -d. -f1,2)
+
 Summary:	Gnome GUI for NetworkManager
 Name:		nm-applet
-Version:	0.7.0
-Release:	%mkrel 0.3.%{svnrel}
-Source0:	%{name}-%{version}.%{svnrel}.tar.gz
+Version:	0.9.8.2
+Release:	1
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/network-manager-applet/%{url_ver}/network-manager-applet-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Networking
 Url:		http://www.gnome.org/projects/NetworkManager/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	libnm_util-devel libnm_glib-devel
-BuildRequires:	dbus-devel dbus-glib-devel libGConf2-devel
-BuildRequires:	gnome-keyring-devel gnome-panel-devel hal-devel
-BuildRequires:	libglade2-devel libnotify-devel intltool nss-devel
-BuildRequires:	libpolkit-devel libpolkit-gnome-devel libiw-devel
-Requires:	networkmanager %{_lib}gail-gnome
-Provides:	networmanager-gnome = %{version}-%{release}
+BuildRequires:	gettext
+BuildRequires:	libtool
+BuildRequires:	intltool
+BuildRequires:	perl-XML-Parser
+BuildRequires:	ppp-devel
+BuildRequires:	pkgconfig(dbus-1)
+BuildRequires:	pkgconfig(gnome-keyring-1)
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	pkgconfig(libnm-util)
+BuildRequires:	pkgconfig(libnm-glib)
+BuildRequires:	pkgconfig(libnm-glib-vpn)
+BuildRequires:	pkgconfig(libpng15)
+BuildRequires:	pkgconfig(libsecret-1)
+BuildRequires:	pkgconfig(libnotify)
+Requires:	dbus
+Requires:	gnome-keyring
+Requires:	gtk+3
+Requires:	NetworkManager
+Requires:	pptp-linux
+Requires:	shared-mime-info
 
 %description
 This package contains GNOME utilities and applications for use with
 NetworkManager, including a panel applet for wireless networks.
 
 %prep
-%setup -q
+%setup -q -n network-manager-applet-%{version}
 
 %build
 autoreconf -i --force
@@ -35,7 +48,6 @@ intltoolize --force
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 %find_lang %{name}
@@ -48,11 +60,7 @@ find %{buildroot} -name \*.la|xargs rm -f
 %postun
 %clean_icon_cache hicolor
 
-%clean
-rm -rf %{buildroot}
-
 %files -f nm-applet.lang
-%defattr(-,root,root)
 %doc ChangeLog NEWS AUTHORS README CONTRIBUTING
 %{_bindir}/nm-applet
 %{_bindir}/nm-connection-editor
