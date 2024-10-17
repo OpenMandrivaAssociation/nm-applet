@@ -7,7 +7,7 @@ Release:	1
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/network-manager-applet/%{url_ver}/network-manager-applet-%{version}.tar.xz
 License:	GPLv2+
 Group:		System/Configuration/Networking
-Url:		http://www.gnome.org/projects/NetworkManager/
+Url:		https://www.gnome.org/projects/NetworkManager/
 BuildRequires:	gettext
 BuildRequires:	libtool
 BuildRequires:	intltool
